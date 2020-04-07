@@ -1,0 +1,35 @@
+{% extends 'news/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Latest News
+{% endblock %}
+{% block body_block %}
+    <div class="title">
+        <h1>Latest News</h1>
+        <form action="{% url 'news:login' %}">
+        <input type="submit" value="Admin?" />
+        </form>
+    </div>
+    {% if stories %}
+        <ul>
+            {%for story in stories %}
+                <li>
+                    <div class="card">
+                        <div class="container">
+                            <h2>{{ story.heading }}</h2>
+                            <p>{{ story.date }}</p>
+                            {% if story.image %}
+                                <img src="{{ MEDIA_URL }}{{ story.image }}"/>
+                            {% endif %}
+                            <p>{{ story.body }}</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+            {% else %}
+                <strong>There are no news stories present.</strong>
+            {% endif %}
+        </div>
+{% endblock %}
